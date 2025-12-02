@@ -110,6 +110,30 @@ Akses aplikasi di: `http://localhost:8000`
 - **Password**: password
 - **Role**: User (akses terbatas sesuai subscription)
 
+## 🎯 Demo Data
+
+Setelah menjalankan `php artisan db:seed`, aplikasi akan terisi dengan data demo:
+
+### 📦 Sample Materials (5 items)
+- Biji Kopi Arabika (Rp 150,000/kg)
+- Gula Pasir (Rp 15,000/kg)
+- Garam Dapur (Rp 8,000/kg)
+- Kemasan Plastik (Rp 500/pcs)
+- Label Sticker (Rp 200/pcs)
+
+### 🏭 Sample Products (2 items)
+- Kopi Instan Premium 1kg
+- Kopi Instan Ekonomis 500g
+
+### 📋 Sample Recipes (5 recipes)
+- Resep lengkap untuk kedua produk kopi
+- Takaran material per unit output
+
+### ⚙️ Sample Production Batches (3 batches)
+- Batch produksi dengan HPP otomatis
+- Biaya tambahan dan harga jual
+- Breakdown material lengkap
+
 ## 🏗️ Architecture
 
 ### Tech Stack
