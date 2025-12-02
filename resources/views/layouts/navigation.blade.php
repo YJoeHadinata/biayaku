@@ -43,6 +43,10 @@
                         <i class="bi bi-file-earmark-bar-graph text-sm"></i>
                         <span>{{ __('Laporan') }}</span>
                     </x-nav-link>
+                    <x-nav-link :href="route('subscriptions.status')" :active="request()->routeIs('subscriptions.*')" class="flex items-center space-x-2">
+                        <i class="bi bi-credit-card text-sm"></i>
+                        <span>{{ __('Langganan') }}</span>
+                    </x-nav-link>
 
                     @if (Auth::user()->isAdmin())
                         <div class="border-l border-gray-300 pl-4 ml-4">
@@ -136,39 +140,51 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden bg-white border-t border-gray-200">
         <div class="px-4 py-6 space-y-2">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="flex items-center space-x-3">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="flex items-center space-x-3"
+                @click="open = false">
                 <i class="bi bi-house-door text-lg"></i>
                 <span>{{ __('Dashboard') }}</span>
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('materials.index')" :active="request()->routeIs('materials.*')" class="flex items-center space-x-3">
+            <x-responsive-nav-link :href="route('materials.index')" :active="request()->routeIs('materials.*')" class="flex items-center space-x-3"
+                @click="open = false">
                 <i class="bi bi-box-seam text-lg"></i>
                 <span>{{ __('Material') }}</span>
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" class="flex items-center space-x-3">
+            <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" class="flex items-center space-x-3"
+                @click="open = false">
                 <i class="bi bi-cup-hot text-lg"></i>
                 <span>{{ __('Produk') }}</span>
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('production-batches.index')" :active="request()->routeIs('production-batches.*')" class="flex items-center space-x-3">
+            <x-responsive-nav-link :href="route('production-batches.index')" :active="request()->routeIs('production-batches.*')" class="flex items-center space-x-3"
+                @click="open = false">
                 <i class="bi bi-gear text-lg"></i>
                 <span>{{ __('Batch Produksi') }}</span>
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('operational.index')" :active="request()->routeIs('operational.*')" class="flex items-center space-x-3">
+            <x-responsive-nav-link :href="route('operational.index')" :active="request()->routeIs('operational.*')" class="flex items-center space-x-3"
+                @click="open = false">
                 <i class="bi bi-cash-stack text-lg"></i>
                 <span>{{ __('Biaya Operasional') }}</span>
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('miscellaneous.index')" :active="request()->routeIs('miscellaneous.*')" class="flex items-center space-x-3">
+            <x-responsive-nav-link :href="route('miscellaneous.index')" :active="request()->routeIs('miscellaneous.*')" class="flex items-center space-x-3"
+                @click="open = false">
                 <i class="bi bi-receipt text-lg"></i>
                 <span>{{ __('Biaya Lain-lain') }}</span>
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')" class="flex items-center space-x-3">
+            <x-responsive-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')" class="flex items-center space-x-3"
+                @click="open = false">
                 <i class="bi bi-file-earmark-bar-graph text-lg"></i>
                 <span>{{ __('Laporan') }}</span>
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('subscriptions.status')" :active="request()->routeIs('subscriptions.*')" class="flex items-center space-x-3"
+                @click="open = false">
+                <i class="bi bi-credit-card text-lg"></i>
+                <span>{{ __('Langganan') }}</span>
             </x-responsive-nav-link>
 
             @if (Auth::user()->isAdmin())
                 <div class="border-t border-gray-200 pt-4 mt-4">
                     <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')"
-                        class="flex items-center space-x-3 bg-red-50 text-red-700">
+                        class="flex items-center space-x-3 bg-red-50 text-red-700" @click="open = false">
                         <i class="bi bi-shield-check text-lg"></i>
                         <span>{{ __('Admin') }}</span>
                     </x-responsive-nav-link>
@@ -199,11 +215,11 @@
             </div>
 
             <div class="space-y-2">
-                <x-responsive-nav-link :href="route('subscriptions.status')" class="flex items-center space-x-3">
+                <x-responsive-nav-link :href="route('subscriptions.status')" class="flex items-center space-x-3" @click="open = false">
                     <i class="bi bi-credit-card text-blue-500"></i>
                     <span>{{ __('Langganan') }}</span>
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('profile.edit')" class="flex items-center space-x-3">
+                <x-responsive-nav-link :href="route('profile.edit')" class="flex items-center space-x-3" @click="open = false">
                     <i class="bi bi-person-gear text-gray-500"></i>
                     <span>{{ __('Profile') }}</span>
                 </x-responsive-nav-link>
@@ -213,7 +229,7 @@
                     @csrf
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault(); this.closest('form').submit();"
-                        class="flex items-center space-x-3 text-red-600">
+                        class="flex items-center space-x-3 text-red-600" @click="open = false">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>{{ __('Log Out') }}</span>
                     </x-responsive-nav-link>

@@ -1,6 +1,6 @@
 # BiayaKu - Sistem Perhitungan Biaya Usaha
 
-Sistem web-based untuk menghitung biaya operasional, HPP (Harga Pokok Penjualan), dan biaya lain-lain terkait usaha dengan sistem takaran/resep terintegrasi. Dibangun dengan Laravel 12 dan mendukung multi-branch dengan subscription management.
+Sistem web-based untuk menghitung biaya operasional, HPP (Harga Pokok Penjualan), dan biaya lain-lain terkait usaha dengan sistem takaran/resep terintegrasi. Dibangun dengan Laravel 12.40.2 dan PHP 8.4.12, mendukung multi-branch dengan subscription management yang lengkap.
 
 ## ✨ Fitur Utama
 
@@ -32,11 +32,20 @@ Sistem web-based untuk menghitung biaya operasional, HPP (Harga Pokok Penjualan)
 - **Subscription Plans**: Free, Pro, Enterprise dengan limits berbeda
 - **Subscription Management**: Admin dapat approve/reject subscription
 - **Automatic Expiration**: Subscription expired otomatis setelah periode berakhir
+- **Subscription Status**: User dapat melihat status langganan aktif dan pending
+- **Upgrade System**: Sistem upgrade langganan dengan approval workflow
+
+### 🎨 User Interface & Experience
+- **Responsive Design**: Navbar dan layout yang fully responsive untuk mobile
+- **Modern UI**: Desain modern dengan gradient backgrounds dan icons
+- **Profile Management**: Halaman profile yang redesigned tanpa delete account
+- **Navigation Enhancement**: Link subscription di main navigation untuk kemudahan akses
+- **Mobile Optimization**: Menu hamburger dengan auto-close functionality
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- PHP 8.2 atau lebih tinggi
+- PHP 8.4.12 atau lebih tinggi
 - Composer
 - Node.js 18+ (untuk Vite)
 - MySQL 8.0+ atau PostgreSQL
@@ -137,12 +146,13 @@ Setelah menjalankan `php artisan db:seed`, aplikasi akan terisi dengan data demo
 ## 🏗️ Architecture
 
 ### Tech Stack
-- **Backend**: Laravel 12 (PHP Framework)
-- **Frontend**: Laravel Blade + Tailwind CSS
+- **Backend**: Laravel 12.40.2 (PHP Framework)
+- **Frontend**: Laravel Blade + Tailwind CSS + Alpine.js
 - **Database**: MySQL/PostgreSQL dengan Eloquent ORM
 - **Authentication**: Laravel Breeze
 - **Export**: Maatwebsite Excel, Barryvdh DomPDF
 - **Scheduling**: Laravel Task Scheduling
+- **Icons**: Bootstrap Icons
 
 ### Database Schema
 ```sql
@@ -335,10 +345,31 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Issues**: [GitHub Issues](https://github.com/your-username/biayaku/issues)
 - **Email**: support@biayaku.com
 
+## 📋 Recent Updates (v1.0.1)
+
+### ✨ New Features
+- **Enhanced Subscription Status**: Users can now view all pending subscription applications
+- **Responsive Navigation**: Improved mobile navigation with auto-close functionality
+- **Redesigned Profile Page**: Modern UI without delete account option
+- **Navigation Improvements**: Subscription link added to main navigation bar
+
+### 🐛 Bug Fixes
+- Fixed subscription upgrade exception for free plan users
+- Improved mobile menu behavior and responsiveness
+- Enhanced error handling in subscription management
+
+### 🎨 UI/UX Improvements
+- Modern gradient designs and improved visual hierarchy
+- Better mobile responsiveness across all pages
+- Enhanced success/error messaging
+- Improved form layouts and user feedback
+
 ## 🙏 Acknowledgments
 
 - Laravel Framework
 - Tailwind CSS
+- Alpine.js
+- Bootstrap Icons
 - Maatwebsite Excel
 - Barryvdh DomPDF
 - Laravel Community

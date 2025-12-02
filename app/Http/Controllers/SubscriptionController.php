@@ -27,9 +27,10 @@ class SubscriptionController extends Controller
     {
         $user = auth()->user();
         $subscription = $user->activeSubscription();
+        $pendingSubscriptions = $user->subscriptions()->pending()->with('plan')->get();
         $plans = SubscriptionPlan::active()->ordered()->get();
 
-        return view('subscriptions.status', compact('subscription', 'plans'));
+        return view('subscriptions.status', compact('subscription', 'pendingSubscriptions', 'plans'));
     }
 
     /**
@@ -110,8 +111,8 @@ class SubscriptionController extends Controller
                 ->with('error', 'Anda belum memiliki langganan aktif.');
         }
 
-        // Cancel current subscription
-        $currentSubscription->cancel();
+        // Cancel current subscription (directly update status to avoid restrictions on free plans)
+        $currentSubscription->update(['status' => 'cancelled']);
 
         // Create new subscription - pending for paid plans, active for free plans
         $status = $plan->price > 0 ? 'pending' : 'active';

@@ -83,6 +83,63 @@
                     </div>
                 </div>
 
+                <!-- Pending Subscriptions -->
+                @if ($pendingSubscriptions->count() > 0)
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
+                        <div class="bg-gradient-to-r from-amber-50 to-orange-50 px-8 py-6 border-b border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                                <i class="bi bi-clock-history mr-3 text-amber-600"></i>
+                                Langganan Sedang Diajukan
+                            </h3>
+                            <p class="text-gray-600 mt-1">Permintaan langganan yang sedang menunggu konfirmasi admin</p>
+                        </div>
+
+                        <div class="p-8">
+                            <div class="space-y-6">
+                                @foreach ($pendingSubscriptions as $pendingSub)
+                                    <div
+                                        class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">
+                                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                            <div class="mb-4 lg:mb-0">
+                                                <div class="flex items-center mb-3">
+                                                    <div class="bg-amber-500 rounded-full p-2 mr-3">
+                                                        <i class="bi bi-hourglass-split text-white text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h4 class="text-lg font-bold text-gray-900">Paket
+                                                            {{ $pendingSub->plan->name }}</h4>
+                                                        <p class="text-gray-600">{{ $pendingSub->plan->description }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center text-gray-500 text-sm">
+                                                    <i class="bi bi-calendar-event mr-2"></i>
+                                                    <span>Diajukan pada
+                                                        {{ $pendingSub->created_at->format('d M Y H:i') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="text-center lg:text-right">
+                                                <div class="text-2xl font-bold text-gray-900 mb-2">
+                                                    {{ $pendingSub->plan->price > 0 ? 'Rp' . number_format($pendingSub->plan->price, 0, ',', '.') : 'Gratis' }}
+                                                    @if ($pendingSub->plan->price > 0)
+                                                        <span
+                                                            class="text-gray-500 text-sm">/{{ $pendingSub->plan->interval }}</span>
+                                                    @endif
+                                                </div>
+                                                <div
+                                                    class="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg font-medium text-sm">
+                                                    <i class="bi bi-clock mr-2"></i>
+                                                    Menunggu Konfirmasi Admin
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <!-- Usage Stats -->
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                     <div class="bg-gradient-to-r from-gray-50 to-blue-50 px-8 py-6 border-b border-gray-100">
