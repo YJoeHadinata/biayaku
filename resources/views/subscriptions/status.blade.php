@@ -60,16 +60,24 @@
                                     <i class="bi bi-grid mr-2"></i>
                                     Lihat Semua Paket
                                 </a>
-                                <form method="POST" action="{{ route('subscriptions.cancel') }}"
-                                    onsubmit="return confirm('Apakah Anda yakin ingin membatalkan langganan?')"
-                                    class="inline">
-                                    @csrf
-                                    <button type="submit"
-                                        class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-200 inline-flex items-center justify-center">
-                                        <i class="bi bi-x-circle mr-2"></i>
-                                        Batalkan
-                                    </button>
-                                </form>
+                                @if ($subscription->plan->slug !== 'free')
+                                    <form method="POST" action="{{ route('subscriptions.cancel') }}"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin membatalkan langganan?')"
+                                        class="inline">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-xl transition-all duration-200 inline-flex items-center justify-center">
+                                            <i class="bi bi-x-circle mr-2"></i>
+                                            Batalkan
+                                        </button>
+                                    </form>
+                                @else
+                                    <span
+                                        class="bg-gray-500 bg-opacity-20 text-white font-semibold py-2 px-6 rounded-xl inline-flex items-center justify-center cursor-not-allowed">
+                                        <i class="bi bi-shield-check mr-2"></i>
+                                        Paket Free
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </div>

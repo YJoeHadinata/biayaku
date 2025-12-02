@@ -161,18 +161,26 @@
                                                 Setujui
                                             </button>
                                         </form>
-                                        <form method="POST"
-                                            action="{{ route('admin.subscriptions.reject', $subscription->id) }}"
-                                            class="inline"
-                                            onsubmit="return confirm('Tolak subscription ini? User akan tetap menggunakan paket gratis.')">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit"
-                                                class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200">
+                                        @if ($subscription->plan->slug !== 'free')
+                                            <form method="POST"
+                                                action="{{ route('admin.subscriptions.reject', $subscription->id) }}"
+                                                class="inline"
+                                                onsubmit="return confirm('Tolak subscription ini? User akan tetap menggunakan paket gratis.')">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit"
+                                                    class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200">
+                                                    <i class="bi bi-x-circle mr-1"></i>
+                                                    Tolak
+                                                </button>
+                                            </form>
+                                        @else
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-100 cursor-not-allowed">
                                                 <i class="bi bi-x-circle mr-1"></i>
-                                                Tolak
-                                            </button>
-                                        </form>
+                                                Free Plan
+                                            </span>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

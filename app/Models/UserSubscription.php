@@ -90,7 +90,12 @@ class UserSubscription extends Model
 
     public function cancel()
     {
-        $this->update(['status' => 'canceled']);
+        // Free subscriptions cannot be cancelled
+        if ($this->plan->slug === 'free') {
+            throw new \Exception('Free subscriptions cannot be cancelled.');
+        }
+
+        $this->update(['status' => 'cancelled']);
     }
 
     public function reactivate()

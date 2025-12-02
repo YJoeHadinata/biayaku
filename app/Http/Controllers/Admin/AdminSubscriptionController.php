@@ -60,6 +60,11 @@ class AdminSubscriptionController extends Controller
             return redirect()->back()->with('error', 'Subscription tidak dalam status pending.');
         }
 
+        // Free subscriptions cannot be rejected
+        if ($subscription->plan->slug === 'free') {
+            return redirect()->back()->with('error', 'Free subscription tidak dapat ditolak.');
+        }
+
         $subscription->update(['status' => 'cancelled']);
 
         return redirect()->back()->with('success', 'Subscription berhasil ditolak.');

@@ -52,7 +52,7 @@ class SubscriptionController extends Controller
         }
 
         // Cancel any existing active subscriptions
-        $user->subscriptions()->active()->update(['status' => 'canceled']);
+        $user->subscriptions()->active()->update(['status' => 'cancelled']);
 
         // Create new subscription - pending for paid plans, active for free plans
         $status = $plan->price > 0 ? 'pending' : 'active';
@@ -85,10 +85,15 @@ class SubscriptionController extends Controller
                 ->with('error', 'Tidak ada langganan aktif.');
         }
 
-        $subscription->cancel();
+        try {
+            $subscription->cancel();
 
-        return redirect()->route('subscriptions.status')
-            ->with('success', 'Langganan berhasil dibatalkan.');
+            return redirect()->route('subscriptions.status')
+                ->with('success', 'Langganan berhasil dibatalkan.');
+        } catch (\Exception $e) {
+            return redirect()->route('subscriptions.status')
+                ->with('error', $e->getMessage());
+        }
     }
 
     /**
